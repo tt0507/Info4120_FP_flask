@@ -1,13 +1,5 @@
-from flask import Flask, render_template, url_for, flash, redirect
-from flask_sqlalchemy import SQLAlchemy
-from forms import LoginForm
+from app import db
 from datetime import datetime
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '91f605c898d3fe1082914c0e7dfda152'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-
-db = SQLAlchemy(app)
 
 
 class User(db.Model):
@@ -46,29 +38,3 @@ class Log(db.Model):
 
 	def __repr__(self):
 		return f"User('{self.id}','{self.user_id}', '{self.log_numberd}', '{self.recent_sent_date}')"
-
-
-@app.route('/')
-def index():
-	return render_template('index.html', title='Home')
-
-
-@app.route('/about')
-def about():
-	return render_template('about.html', title='About')
-
-
-@app.route('/login', methods=['POST', 'GET'])
-def login():
-	form = LoginForm()
-	if form.validate_on_submit():
-		if form.username.data == 'admin' and form.password.data == 'info4120':  # dummy login
-			flash('Logged in', 'success')
-			return redirect(url_for('index'))
-		else:
-			flash('Login unsuccessful. Please check username and password', 'danger')
-	return render_template('login.html', title='Login', form=form)
-
-
-if __name__ == '__main__':
-	app.run(debug=True)
