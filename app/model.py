@@ -16,7 +16,7 @@ class Answer(db.Model):
 	user = db.relationship('User', backref='user', lazy=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	log = db.relationship('Log', backref='log', lazy=True)
-	log_number = db.Column(db.Integer, db.ForeignKey('log_number'), nullable=False)
+	log_number = db.Column(db.Integer, db.ForeignKey('log.id'), nullable=False)
 	question1 = db.Column(db.String(20), unique=True, nullable=False)
 	question2 = db.Column(db.String(20), unique=True, nullable=False)
 	question3 = db.Column(db.String(20), unique=True, nullable=False)
@@ -31,7 +31,7 @@ class Answer(db.Model):
 
 class Log(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	user = db.relationship('User', backref='user', lazy=True)
+	user = db.relationship('User', backref='user_id', lazy=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	log_number = db.Column(db.Integer)
 	recent_sent_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
