@@ -48,19 +48,28 @@ def log():
 	return render_template('log.html', title='Log')
 
 
-@app.route('/survey', methods=['POST', 'GET'])
+@app.route('/survey', methods=('POST', 'GET'))
 def survey():
 	form = Survey()
-	# if request.method == 'POST':
-	if form.validate_on_submit():
-		answer1 = request.form.get('question1')
-		answer2 = request.form.get('question2')
-		answer3 = request.form.get('question3')
-		answer4 = request.form.get('question4')
-		return redirect(url_for('record'))
+	# answer1 = form.question1.data
+	if request.method == 'POST':
+		answer1 = form.question1.data
+		answer2 = form.question2.data
+		answer3 = form.question3.data
+		answer4 = form.question4.data
+		return redirect(url_for('record', answer1=answer1, answer2=answer2, answer3=answer3, answer4=answer4))
+	if not form.validate_on_submit():
+		print('Form not validating')
 	return render_template('survey.html', title='Survey', form=form)
 
 
 @app.route('/record')
 def record():
-	return render_template('record.html', title='Record')
+	answer1 = request.args.get('answer1')
+	answer2 = request.args.get('answer2')
+	answer3 = request.args.get('answer3')
+	answer4 = request.args.get('answer4')
+
+	data = Answer()
+	return render_template('record.html', title='Record', answer1=answer1, answer2=answer2, answer3=answer3,
+	                       answer4=answer4)

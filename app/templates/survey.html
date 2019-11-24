@@ -10,8 +10,8 @@
 <main>
   <div class="content-section container">
     <h1 class="down">Please answer the survey</h1>
-    <form method="GET" action="">
-      {{ form.hidden_tag() }}
+    <form method="POST" action="">
+      {{ form.csrf_token }}
       <div class="form-group">
         <label for="question1">{{form.question1.label(class="form-control-label")}}</label>
         <select class="form-control" id="question1" name="question1">
@@ -45,7 +45,7 @@
         </select>
       </div>
       <div class="form-group">
-      {{form.submit(class="btn btn-outline-info")}}
+        {{form.submit(class="btn btn-outline-info")}}
       </div>
     </form>
   </div>
