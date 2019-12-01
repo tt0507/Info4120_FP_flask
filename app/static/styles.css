@@ -7,3 +7,28 @@
     margin-top: 10px;
     padding-top: 10px;
 }
+
+.flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    left: 50%;
+    right: 50%;
+}
+
+.border_change{
+    border-radius: 50%;
+}
+
+.shift{
+    margin-top: 20px;
+}
+
+.center{
+    text-align: center;
+}
+
+.col_center{
+    margin-right: auto;
+    margin-left: auto;
+}
