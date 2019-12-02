@@ -7,47 +7,50 @@
 {% block content %}
 <div class="content-section container">
   <form method="POST" action="">
-  {{form.hidden_tag()}}
-  <fieldset class = "form-group">
-    <legend class="border-bottom mb-4">Login</legend>
-    <div class="form-group">
-      {{form.username.label(class="form-control-label")}}
+    {{form.hidden_tag()}}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Login</legend>
+      <div class="form-group">
+        {{form.username.label(class="form-control-label")}}
 
-      {% if form.username.errors %}
+        {% if form.username.errors %}
         {{form.username(class="form-control form-control-lg is-invalid")}}
         <div class="invalid-feedback">
           {% for error in form.username.errors%}
-            <span>{{error}}</span>
+          <span>{{error}}</span>
           {% endfor %}
         </div>
-      {% else %}
+        {% else %}
         {{form.username(class="form-control form-control-lg")}}
-      {% endif %}
-    </div>
+        {% endif %}
+      </div>
 
-    <div class="form-group">
-      {{form.password.label(class="form-control-label")}}
+      <div class="form-group">
+        {{form.password.label(class="form-control-label")}}
 
-      {% if form.password.errors %}
+        {% if form.password.errors %}
         {{form.password(class="form-control form-control-lg is-invalid")}}
         <div class="invalid-feedback">
           {% for error in form.password.errors%}
-            <span>{{error}}</span>
+          <span>{{error}}</span>
           {% endfor %}
         </div>
-      {% else %}
+        {% else %}
         {{form.password(class="form-control form-control-lg")}}
-      {% endif %}
-    </div>
+        {% endif %}
+      </div>
 
-    <div class="form-check">
-      {{form.remember(class="form-check-input")}}
-      {{form.remember.label(class="form-check-label")}}
-    </div>
-  </fieldset>
-  <div class="form-group">
+      <div class="form-check">
+        {{form.remember(class="form-check-input")}}
+        {{form.remember.label(class="form-check-label")}}
+      </div>
+    </fieldset>
+    <div class="form-group">
       {{form.submit(class="btn btn-outline-info")}}
-  </div>
+    </div>
   </form>
+
+  <a href="https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=22BFHK&redirect_uri=http://127.0.0.1:5000&scope=heartrate&expires_in=604800">Login
+    in using Fitbit</a>
 </div>
 {% endblock %}
