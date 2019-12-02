@@ -7,4 +7,4 @@
 *.iml
 out
 gen
-app/send_survey.py
+!/app/send_survey.py
