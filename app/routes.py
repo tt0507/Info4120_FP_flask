@@ -18,7 +18,7 @@ def about():
 @app.route('/home')
 def home():
     recent_answer = Answer.query.filter_by(user_id=1).order_by(Answer.id.desc()).first()
-    past_answer = Answer.query.order_by(Answer.id.desc()).all()
+    past_answer = Answer.query.filter_by(user_id=1).order_by(Answer.id.desc()).all()
 
     return render_template('home.html', title='Home', recent_answer=recent_answer, past_answer=past_answer)
 

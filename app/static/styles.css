@@ -32,3 +32,11 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+.show{
+    display: none;
+}
+
+.pointer{
+    cursor: pointer;
+}

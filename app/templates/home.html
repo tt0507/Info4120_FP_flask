@@ -16,27 +16,29 @@
     <p>Do you feel worse than yesterday?: {{recent_answer.question4}}</p>
   </div>
   <h2>Past log</h2>
+  <p style="font-size: 12px">Click log number to see your answer</p>
   {% for record in past_answer %}
-    {% if record.id != 1 %}
-    <h3 onclick="showElement()">Log #{{record.log_number}}</h3>
-    <div class="show jumbotron">
-      <p>How are you feeling right now?: {{record.question1}}</p>
-      <p>What were you doing at the moment the survey was sent?: {{record.question2}}</p>
-      <p>Are you feeling sad right now?: {{record.question3}}</p>
-      <p>Do you feel worse than yesterday?: {{record.question4}}</p>
-    </div>
-    {% endif %}
+  {% if record.id != past_answer|length %}
+  <h3 onclick="showElement()" class="pointer">Log #{{record.log_number}}</h3>
+  <div class="show jumbotron" id="log{{record.log_number}}">
+    <p>How are you feeling right now?: {{record.question1}}</p>
+    <p>What were you doing at the moment the survey was sent?: {{record.question2}}</p>
+    <p>Are you feeling sad right now?: {{record.question3}}</p>
+    <p>Do you feel worse than yesterday?: {{record.question4}}</p>
+  </div>
+
+  <script>
+      function showElement() {
+          let x = document.getElementById("log{{record.log_number}}");
+          if (x.style.display === "none") {
+              x.style.display = "block";
+          } else {
+              x.style.display = "none"
+          }
+      }
+  </script>
+  {% endif %}
   {% endfor %}
 </div>
 
-<script>
-  function showElement(){
-    let x = document.getElementsByClassName("show");
-    if (x.style.display === "none"){
-        x.style.display = "block";
-    } else {
-        x.style.display = "none"
-    }
-  }
-</script>
 {% endblock %}
