@@ -17,7 +17,10 @@ def about():
 
 @app.route('/home')
 def home():
-    return render_template('home.html', title='Home')
+    recent_answer = Answer.query.filter_by(user_id=1).order_by(Answer.id.desc()).first()
+    past_answer = Answer.query.order_by(Answer.id.desc()).all()
+
+    return render_template('home.html', title='Home', recent_answer=recent_answer, past_answer=past_answer)
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -70,5 +73,12 @@ def record():
     answer3 = request.args.get('answer3')
     answer4 = request.args.get('answer4')
 
-    data = Answer()
+    log_data = Log(user_id=1)
+    answer_data = Answer(user_id=1, log_number=1, question1=answer1, question2=answer2, question3=answer3,
+                         question4=answer4)
+
+    db.session.add(log_data)
+    db.session.add(answer_data)
+    db.session.commit()
+
     return render_template('record.html', title='Record')

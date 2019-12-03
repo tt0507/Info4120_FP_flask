@@ -16,3 +16,6 @@ xhr.onload = function () {
     }
 };
 xhr.send();
+
+// Code taken from Raja Tamli
+// Source: https://softauthor.com/fitbit-api-javascript-oauth2/

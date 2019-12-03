@@ -19,27 +19,26 @@ class User(db.Model, UserMixin):
 
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user = db.relationship('User', backref='user', lazy=True)
+    # user = db.relationship('User', backref='user', lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    log = db.relationship('Log', backref='log', lazy=True)
+    # log = db.relationship('Log', backref='log', lazy=True)
     log_number = db.Column(db.Integer, db.ForeignKey('log.id'), nullable=False)
     question1 = db.Column(db.String(20), unique=True, nullable=False)
     question2 = db.Column(db.String(20), unique=True, nullable=False)
     question3 = db.Column(db.String(20), unique=True, nullable=False)
     question4 = db.Column(db.String(20), unique=True, nullable=False)
-    question5 = db.Column(db.String(20), unique=True, nullable=False)
     date_answer = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __repr__(self, ):
-        return f"User('{self.id}','{self.user_id}', '{self.log_numberd}', '{self.question1}', '{self.question2}', " \
-               f"'{self.question3}', '{self.question4}', '{self.question5}', '{self.date_answer}')"
+        return f"User('{self.id}','{self.user_id}', '{self.log_number}', '{self.question1}', '{self.question2}', " \
+               f"'{self.question3}', '{self.question4}', '{self.date_answer}')"
 
 
 class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user = db.relationship('User', backref='user_id', lazy=True)
+    # user = db.relationship('User', backref='user_id', lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    log_number = db.Column(db.Integer)
+    log_number = db.Column(db.Integer, autoincrement=True)
     recent_sent_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __repr__(self):
